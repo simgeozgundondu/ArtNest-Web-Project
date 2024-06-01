@@ -23,15 +23,18 @@ async function populateArtists() {
             artistButton.setAttribute('type', 'button');
             artistButton.classList.add('btn', 'btn-dark');
 
-            // Create and add image element (GIF) to the button
-            const gifImage = document.createElement('img');
-            gifImage.classList.add("artistImg")
-            gifImage.src = './img/painting.png'; // Path to your GIF file
-            gifImage.alt = 'Loading...'; // Optional, alt text for accessibility
-            artistButton.appendChild(gifImage); // Append the GIF image to the button
+            // Create and add image element
+            const artistImage = document.createElement('img');
+            artistImage.classList.add("artistImg")
+            artistImage.src = artistItem.artist_img;
+            artistImage.alt = 'Loading...';
+            artistImage.style.width = '300px';
+            artistImage.style.height = '380px';
+            artistImage.style.marginBottom='10px';
+            artistButton.appendChild(artistImage);// Append the image to the button
 
             // Create a paragraph element for artist name
-            const artistNameParagraph = document.createElement('p');
+            const artistNameParagraph = document.createElement('h5');
             artistNameParagraph.textContent = artistItem.ArtistName;
             artistButton.appendChild(artistNameParagraph);
 
@@ -48,7 +51,8 @@ async function populateArtists() {
                         date: artistInfo.Date,
                         nationality: artistInfo.Nationality,
                         bio: artistInfo.Bio,
-                        artworks: JSON.stringify(artistInfo.Artworks)
+                        artworks: JSON.stringify(artistInfo.Artworks),
+                        artistImage: artistInfo.artist_img
                     });
 
                     window.location.href = `./artistDetail.html?${params.toString()}`;
@@ -78,6 +82,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const nationality = urlParams.get('nationality');
     const bio = urlParams.get('bio');
     const artworks = urlParams.get('artworks');
+    const artistImage = urlParams.get('artistImage');
 
     if (artistName) {
         // Update HTML content with artist information
@@ -97,6 +102,10 @@ document.addEventListener('DOMContentLoaded', async function () {
         const bioElement = document.getElementById('bio');
         if (bio) {
             bioElement.textContent = `${bio}`;
+        }
+        const artistImageElement = document.getElementById('artistImage');
+        if (artistImage) {
+            artistImageElement.src = artistImage;
         }
 
         if (artworks) {
