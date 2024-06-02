@@ -141,11 +141,10 @@ function filterArtists() {
 
         // Toggle visibility based on search match
         if (artistName.includes(searchText)) {
-            button.style.display = 'block'; // Show matching artist button
-            categorySection.style.display = 'block'; // Show corresponding category section
+            button.style.display = 'block';
+            categorySection.style.display = 'block'; 
         } else {
-            button.style.display = 'none'; // Hide non-matching artist button
-            // Check if all artist buttons are hidden in the category section
+            button.style.display = 'none';
             const visibleButtons = categorySection.querySelectorAll('.artist-buttons-container button[style="display: block;"]');
             if (visibleButtons.length === 0) {
                 categorySection.style.display = 'none'; // Hide category section if no buttons are visible
